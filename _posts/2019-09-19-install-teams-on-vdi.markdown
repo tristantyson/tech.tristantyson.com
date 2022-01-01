@@ -24,12 +24,13 @@ Take note of the “ALLUSER=1” switch, this isn’t a spelling mistake, so be 
 
 The installer runs a pre check to make sure its being installed onto a VDI based machine. This pre check looks for registry keys relating to the major virtualization vendors. If it doesn’t find the keys it will produce an error message.
 
-![image-title-here](/assets/images/teamsvdi/1.png)
-{% include figure image_path="/assets/images/teamsvdi/1.png" alt="teams" caption="teams" %}
+
+{% include figure image_path="/assets/images/teamsvdi/1.png" %}
 
 A Process Monitor capture reveals the regs keys its expecting:
 
-![image-title-here](/assets/images/teamsvdi/2.png)
+
+{% include figure image_path="/assets/images/teamsvdi/2.png" %}
 
 ```
 HKLM\SOFTWARE\Citrix\PortICA
