@@ -38,6 +38,8 @@ There are 2 main types of Git repositories:
 
 {% include figure image_path="/assets/images/GitBasics1/Process.png" %}
 
+![alt]({{ site.url }}{{ site.baseurl }}/assets/images/GitBasics1/Process.png)
+
 A typical Git workflow consists of 3 stages. You have a **working directory** which is the root directory of the code you are working on. Once you’ve made the required changes to your files you will “add” your files to a **staging area**, then “commit” them to the **local repository**.
 
 Why stage your files before you commit them? Why not just take your files direct from your working directory into the local repo? Well I've not been able to find a good answer or a good use case to this yet so if you have one please let me know! For the time being just take it for granted that its a 2 stage process to commit you files to Git. You add them to the staging area and then commit to the repository.
