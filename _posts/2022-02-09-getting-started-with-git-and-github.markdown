@@ -36,7 +36,7 @@ There are 2 main types of Git repositories:
 
 ## What is the basic workflow in git?
 
-{% include figure image_path="/assets/images/Gitbasics1/Process.png" %}
+{% include figure image_path="/assets/images/GitBasics1/Process.png" %}
 
 A typical Git workflow consists of 3 stages. You have a **working directory** which is the root directory of the code you are working on. Once you’ve made the required changes to your files you will “add” your files to a **staging area**, then “commit” them to the **local repository**.
 
