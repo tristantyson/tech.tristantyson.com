@@ -4,6 +4,7 @@ title:  "Getting started with Git and GitHub"
 date:   2020-01-29 16:41:31 +0000
 categories: Git GitHub Basics
 ---
+![workflow](/assets/images/GitBasics1/header2.png)
 ## What is git?
 Git is a version control system for tracking changes in computer files. It also helps coordinate working on those files among multiple people.
 
@@ -128,11 +129,9 @@ I’m assuming you have a GitHub account already and you’re signed in (if not 
 
 You can click this [link](https://github.com/new) to be taken straight to the “create a new repository page”. In this example I'm creating a repo named “TestGit”.
 
-{% include figure image_path="/assets/images/Gitbasics1/1.png" %}
-
 ![workflow](/assets/images/GitBasics1/1.png)
 
-You will then be presented with this information. You will need later to push your local repository to GitHub.
+You will then be presented with this information. You will need this later to push your local repository to GitHub.
 
 {% include figure image_path="/assets/images/Gitbasics1/2.png" %}
 
@@ -144,7 +143,7 @@ This would normally be a local project you’ve been working on that you want to
 
 For the sake of this example I’m going to create a directory with some empty .html and .css files in it.
 
-{% include figure image_path="/assets/images/Gitbasics1/files.gif" %}
+![workflow](/assets/images/GitBasics1/files.gif)
 
 Make sure your terminal is in the directory you want to track.
 
@@ -166,11 +165,11 @@ Create a new git repository within your project folder using the git init comman
 $ git init # Initiates an empty git repository
 ```
 
-{% include figure image_path="/assets/images/Gitbasics1/3.png" %}
+![workflow](/assets/images/GitBasics1/3.png)
 
 After running this command, if you enable the “show hidden items” option in windows explorer you will see the .git hidden folder within the file structure.
 
-{% include figure image_path="/assets/images/Gitbasics1/4.png" %}
+![workflow](/assets/images/GitBasics1/4.png)
 
 ## Add files to the staging area.
 
@@ -192,7 +191,7 @@ The command git status shows a list of all new or modified files to be committed
 $ git status # Lists all new or modified files to be committed.
 ```
 
-{% include figure image_path="/assets/images/Gitbasics1/5.png" %}
+![workflow](/assets/images/GitBasics1/5.png)
 
 ## Commit changes to local repository.
 
@@ -202,11 +201,11 @@ We’re now ready to commit the changes to the local repository. Use the git com
 $ git commit -m "inital commit"
 ```
 
-{% include figure image_path="/assets/images/Gitbasics1/6.png" %}
+![workflow](/assets/images/GitBasics1/6.png)
 
 Re-running the git status command at this point now shows nothing to commit
 
-{% include figure image_path="/assets/images/Gitbasics1/7.png" %}
+![workflow](/assets/images/GitBasics1/7.png)
 
 ## Push changes to GitHub remote repository.
 
@@ -224,23 +223,23 @@ You can now push your local repo to the GitHub using git push.
 $ git push origin master
 ```
 
-{% include figure image_path="/assets/images/Gitbasics1/8.png" %}
+![workflow](/assets/images/GitBasics1/8.png)
 
 If this is your first time pushing to GitHub you will be prompted authenticate against your GitHub account.
 
-{% include figure image_path="/assets/images/Gitbasics1/9.png" %}
+![workflow](/assets/images/GitBasics1/9.png)
 
 For the purpose of this basic demo I chose “sign in with your browser” which was already signed in and authorised.
 
-{% include figure image_path="/assets/images/Gitbasics1/10.png" %}
+![workflow](/assets/images/GitBasics1/10.png)
 
 The git push command now completes successfully.
 
-{% include figure image_path="/assets/images/Gitbasics1/11.png" %}
+![workflow](/assets/images/GitBasics1/11.png)
 
 Going into your repository on GitHub itself, will now show the committed files.
 
-{% include figure image_path="/assets/images/Gitbasics1/12.png" %}
+![workflow](/assets/images/GitBasics1/12.png)
 
 That’s it! Your local repository is now pushed into GitHub!
 

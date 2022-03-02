@@ -8,7 +8,7 @@ If you’re wanting to utilise Microsoft Defender Advanced Threat Protection wit
 
 [comment]: <> (![image-title-here](/assets/images/horizonatp/atpcat.gif))
 
-{% include figure image_path="/assets/images/horizonatp/1.png" %}
+![workflow](/assets/images/horizonatp/1.png)
 
 When selecting the “VDI onboarding script for non-persistent machines” option from the Microsoft Defender Security Center, you are provided with this url for guidance.
 
@@ -24,7 +24,7 @@ PowerShell -NoProfile -ExecutionPolicy Bypass -Command "& 'C:\Windows\System32\G
 
 Create the ClonePrep.bat file on the gold master image and reference the location in the pool settings under Guest Customization, Post-Synchronisation script name:
 
-{% include figure image_path="/assets/images/horizonatp/2.png" %}
+![workflow](/assets/images/horizonatp/2.png)
 
 Pool settings to include the ClonePrep script.
 I also had to extend the ClonePrep timeout value to 40 seconds to ensure the script had time to run. This can be done by changing the following registry setting in your gold master image:
@@ -38,7 +38,7 @@ Value Data: 9c40
 ```
 You can enter this in hexadecimal or decimal. The value is represented in milliseconds.
 
-{% include figure image_path="/assets/images/horizonatp/3.png" %}
+![workflow](/assets/images/horizonatp/3.png)
 
 Registry settings to extend the ClonePrep timeout value.
 >Tip: If you're using the VMware OS >Optimisation Tool (and you should be) you >might find a couple of the optimisations it does stop ATP working correctly.
