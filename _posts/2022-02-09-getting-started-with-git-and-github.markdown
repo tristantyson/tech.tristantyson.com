@@ -3,6 +3,7 @@ layout: single
 title:  "Getting started with Git and GitHub"
 date:   2020-01-29 16:41:31 +0000
 categories: Git GitHub Basics
+permalink: gitbasics
 ---
 ![workflow](/assets/images/GitBasics1/header2.png)
 ## What is git?
