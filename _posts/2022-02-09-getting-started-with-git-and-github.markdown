@@ -143,7 +143,7 @@ This would normally be a local project you’ve been working on that you want to
 
 For the sake of this example I’m going to create a directory with some empty .html and .css files in it.
 
-![workflow](/assets/images/GitBasics1/files.gif)
+![workflow](/assets/images/GitBasics1/Files.gif)
 
 Make sure your terminal is in the directory you want to track.
 
