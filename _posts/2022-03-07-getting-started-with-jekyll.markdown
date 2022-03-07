@@ -150,7 +150,7 @@ The file in which the bundler records exact versions of gems that were installed
 
 ### Index.markdown
 
-The home page content on the site. This page will be transferred by Jekyll when the site is built/served.
+The home page content on the site. This page will be transformed by Jekyll when the site is built/served.
 
 ## Creating a new post
 
