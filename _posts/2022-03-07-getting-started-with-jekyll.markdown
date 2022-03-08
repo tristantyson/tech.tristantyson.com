@@ -96,7 +96,8 @@ In your browser of choice, navigate to the URL provided in the terminal window (
 
 ![viewDefaultJekyllSite.gif](/assets/images/JekyllBasicsInstall/viewDefaultJekyllSite.gif)
 
-Congratulations! With just a few simple commands you have created your first Jekyll website! Jekyll is a static site generator that works with templates and markdown files. To customise the site we need to understand the file structure, which I will cover in another blog.
+Congratulations! With just a few simple commands you have created your first Jekyll website! Jekyll is a static site generator that works with templates and markdown files. To customise the site we need to understand the file structure.
+
 ## Jekyll Site Structure
 
 ```
