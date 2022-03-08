@@ -147,7 +147,7 @@ Ruby configuration file that contains the gem dependencies required.
 
 ### Gemfile.lock
 
-The file in which the bundler records exact versions of gems that were installed. Ensures when the site is 
+The file in which the bundler records exact versions of gems that were installed. 
 
 ### Index.markdown
 
