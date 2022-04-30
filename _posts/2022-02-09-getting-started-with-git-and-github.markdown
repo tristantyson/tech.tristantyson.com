@@ -6,7 +6,6 @@ categories: Git GitHub Basics
 permalink: gitbasics
 toc: true
 ---
-![workflow](/assets/images/GitBasics1/header2.png)
 ## What is git?
 Git is a version control system for tracking changes in computer files. It also helps coordinate working on those files among multiple people.
 
