@@ -4,6 +4,10 @@ title:  "On-boarding VMware Horizon View Instant-Clone VDI Pools into Microsoft 
 date:   2020-01-29 16:41:31 +0000
 categories: vmware horizon ATP
 permalink: VMwareHorizonATP
+tags:
+  - VDI
+  - VMware Horizon
+  - ATP
 ---
 If you’re wanting to utilise Microsoft Defender Advanced Threat Protection within your VMware instant clone environment you might find the guidance provided to you isn’t working.
 

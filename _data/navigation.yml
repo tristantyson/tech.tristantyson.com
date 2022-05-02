@@ -1,8 +1,12 @@
 main:
+  - title: "Post"
+    url: /year-archive/
   #- title: "Posts"
    # url: /year-archive/
-  #- title: "Tags"
-   # url: /tags/
+  - title: "Tags"
+    url: /Tags
+  - title: "About"
+    url: /About
   #- title: "About"
    # url: /about/
   #- title: "Posts"

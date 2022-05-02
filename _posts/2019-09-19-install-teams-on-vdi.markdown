@@ -4,6 +4,10 @@ title:  "Install Microsoft Teams on VDI."
 date:   2019-09-19 15:08:31 +0000
 categories: jekyll update
 permalink: TeamOnVDI
+tags:
+  - VDI
+  - VMware Horizon
+  - Teams
 ---
 
 With Microsoft Teams set to replace Skype for Business in the future, more and more businesses are deciding to make the move and deploy Teams.
