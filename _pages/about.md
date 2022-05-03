@@ -5,5 +5,5 @@ permalink: /about/
 ---
 
 Oh hi!
-![me!]({{ site.url }}{{ site.baseurl }}/assets/images/aboutme.jpeg)
+![me!](/assets/images/aboutme.jpeg)
 My friends call me T.
