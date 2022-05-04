@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  "Learn Microsoft Endpoint Manager with the M365 developer program."
+title:  "Learn Microsoft Endpoint Manager with the M365 Developer Program."
 date:   2022-04-05 10:20:31 +0000
 categories: MEM M365 DEV
 permalink: learnmem-m365dev
