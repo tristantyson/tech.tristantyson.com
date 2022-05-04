@@ -1,7 +1,7 @@
 ---
 layout: single
 title:  "Getting started with Jekyll Static Site Generator"
-date:   2020-03-07 17:03:31 +0000
+date:   2022-03-07 17:03:31 +0000
 categories: Jekyll Basics Install
 permalink: gettingstartedwithjekyll
 tags:

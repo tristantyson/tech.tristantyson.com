@@ -1,7 +1,7 @@
 ---
 layout: single
 title:  "Getting started with Git and GitHub"
-date:   2020-01-29 16:41:31 +0000
+date:   2022-02-09 16:41:31 +0000
 categories: Git GitHub Basics
 permalink: gitbasics
 tags:
