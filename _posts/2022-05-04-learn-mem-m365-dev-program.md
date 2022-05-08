@@ -23,6 +23,7 @@ gallery:
     title: "Image 2 title caption"
 
 ---
+## What is the Microsoft 365 Developer Program?
 If you’re wanting to learn how to use Microsoft Endpoint Manager to manage your devices, the best place to start is with a developer subscription, using the Microsoft 365 developer program.
 
 The M365 developer program gives you a free, renewable, 90 day Microsoft 365 E5 developer subscription. This includes; 25 user licences, sample data packs with 16 sample users (including user data), and access to core Microsoft 365 workloads and capabilities, such as; Office 365 apps, Power Platform, Office 365 Advanced Threat Protection, Power Bi, Enterprise Mobility + Security, and Azure Active Directory.
