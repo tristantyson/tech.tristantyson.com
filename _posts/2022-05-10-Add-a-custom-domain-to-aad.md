@@ -1,6 +1,6 @@
 ---
 layout: single
-title:  "Add a Custom Domain Name to Azure Active Directory."
+title:  "Add a Custom Domain Name to Azure Active Directory"
 date:   2022-05-10 11:00:00 +0000
 categories: MEM M365 DEV
 permalink: aad-customdomainname
