@@ -19,7 +19,7 @@ Before you begin, you need to have registered a domain with an [ICANN-Accredited
 
 I use [Google Domains](https://domains.google.com/), but I've also used [Ionos](https://www.ionos.co.uk/) before.
 
-## Add your custom domain name to Azure AD.
+## Add your custom domain name to Azure AD
 Once you have acquired the domain which you wish to use, you can add your custom domain name.
 
 1. Sign in to the [Azure portal](https://portal.azure.com) with an account that is the Global administrator for the directory.
