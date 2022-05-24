@@ -3,7 +3,7 @@ layout: single
 title:  "Install and Configure OneDrive on VMware Horizon for Non-Persistent Pools"
 date:   2022-05-18 10:00:00 +0000
 categories: VMware Horizon OneDrive
-permalink: VMwareHorizon-OneDrive
+permalink: VMwareHorizonOneDrive
 tags:
   - VMware Horizon
   - OneDrive
