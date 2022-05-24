@@ -9,7 +9,7 @@ tags:
   - OneDrive
 toc: true
 ---
-I recently migrated our on-premise VMware Horizon environment over to VMware Horizon Cloud on Azure. As part of the migration we stopped using DEM folder redirection and instead implemented OneDrive and Know Folder Moves. The move made a lot more sense as it mimicked our physical device configuration and was more cloud focused in the new cloud based environment.
+I recently migrated our on-premise VMware Horizon environment over to VMware Horizon Cloud on Azure. As part of the migration we stopped using DEM folder redirection and instead implemented OneDrive and Known Folder Moves. The move made a lot more sense as it mimicked our physical device configuration and was more cloud focused in the new cloud based environment.
 
 In this post I will go over the installation and configuration needed to get this up and running.
 
@@ -24,7 +24,7 @@ For reference, my environment uses AppVolumes for application management, as wel
 
 # Install OneDrive
 
-You can download the latest version of stand alone OneDrive sync client from the [OneDrive release notes](https://support.microsoft.com/en-gb/office/onedrive-release-notes-845dcf18-f921-435e-bf28-4e24b95e5fc0) website. 
+You can download the latest version of the stand alone OneDrive sync client from the [OneDrive release notes](https://support.microsoft.com/en-gb/office/onedrive-release-notes-845dcf18-f921-435e-bf28-4e24b95e5fc0) website. 
 
 Do not install OneDrive as part of the general Office 365 installation. Make sure its excluded in your O365 configuration XML file.
 {: .notice--danger}
@@ -45,7 +45,7 @@ OneDrive automatically checks for updates via a scheduled task. To stop OneDrive
 
 On your master image, after you have installed/manually updated OneDrive, open Task Scheduler.
 
-Under ‘Task Scheduler Library” there is an entry called “OneDrive Per-Machine Standalone Update Task”.
+Under ‘Task Scheduler Library' there is an entry called 'OneDrive Per-Machine Standalone Update Task'.
 
 Right click this task, and select delete.
 
@@ -55,7 +55,7 @@ Right click this task, and select delete.
 
 When using OneDrive you might notice some strange issues where files will not sync and, more visibly, a grey cross (X) will appear on all your OneDrive file icons.
 
-![Untitled](/assets/images/VMwareHorizon-OneDrive/greycrossissue.png)
+![Untitled](/assets/images/VMwareHorizon-OneDrive/greycrossissue.png){: .align-center}
 
 This issue is caused by the AppVolumes agent on the virtual machine.
 
@@ -81,7 +81,7 @@ Enabling this setting will cause the OneDrive sync client to automatically sign 
 The virtual machine needs to be Azure AD joined for this policy to take effect.
 {: .notice--warning}
 
-### **Set via group policy**:
+**Set via Group Policy:**
 
 Location: *Computer Configuration\Policies\Administration Templates\OneDrive\.*
 
@@ -91,7 +91,7 @@ Setting: *Enabled.*
 
 ![Untitled](/assets/images/VMwareHorizon-OneDrive/SSOPolicy.png)
 
-### **Set via registry:**
+**Set via Registry:**
 
 ```
 [HKLM\SOFTWARE\Policies\Microsoft\OneDrive]"SilentAccountConfig"="dword:00000001”
@@ -109,7 +109,7 @@ You can see the status of your files based on the status icon.
 - A green tick means that it is an *locally available file.* The file has been downloaded locally onto the machine.
 - A green tick with a solid background means that it is an *always available* file. This file will always been downloaded locally onto the machine.
 
-### **Set via Group Policy:**
+**Set via Group Policy:**
 
 Location: *Computer Configuration\Policies\Administration Templates\OneDrive\.*
 
@@ -119,17 +119,17 @@ Setting: *Enabled.*
 
 ![Untitled](/assets/images/VMwareHorizon-OneDrive/filesondemandpolicy.png)
 
-### Set via Registry:
+**Set via Registry:**
 
 ```
 [HKLM\SOFTWARE\Policies\Microsoft\OneDrive]"FilesOnDemandEnabled"="dword:00000001"
 ```
 
-## Know Folder Move
+## Known Folder Move
 
-Enabling this setting redirects the users’ Documents, Pictures, and Desktop folders to OneDrive.
+Enabling this setting automatically redirects the users Documents, Pictures, and Desktop folders to OneDrive.
 
-### Set via Group Policy:
+**Set via Group Policy:**
 
 Location: *Computer Configuration\Policies\Administration Templates\OneDrive\.*
 
@@ -143,16 +143,16 @@ Options:
 
 ![KFMPolicy.png](/assets/images/VMwareHorizon-OneDrive/KFMPolicy.png)
 
-### Set via Registry:
+**Set via Registry:**
 
 ```
 [HKLM\SOFTWARE\Policies\Microsoft\OneDrive]"KFMSilentOptIn"="1111-2222-3333-4444"
 [HKLM\SOFTWARE\Policies\Microsoft\OneDrive]"KFMSilentOptInWithNotification"="dword:00000000"
 ```
-Note: 1111-2222-3333-4444 represents your tenant id
+Note: 1111-2222-3333-4444 represents your tenant ID.
 
-# Final Experience
+# User Experience
 
-Installing and configuring OneDrive in this way allows for a seamless user experience. A user can logon to a virtual machine and OneDrive automatically sign-in, synchronise, and redirect folders, without any user interaction or prompts.
+Installing and configuring OneDrive in this way allows for a seamless user experience. A user can logon to a virtual machine and OneDrive will automatically sign-in, synchronise, and redirect folders, all without any user interaction or prompts.
 
 ![fulllogonprocess.gif](/assets/images/VMwareHorizon-OneDrive/fulllogonprocess.gif)
