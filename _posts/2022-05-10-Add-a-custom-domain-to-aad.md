@@ -33,8 +33,8 @@ Once you have acquired the domain which you wish to use, you can add your custom
     ![addcustomdomain.gif](/assets/images/aadcdn/addcustomdomain.gif)
     
 
-You must use a top level domain extension for this to work properly.
-{: .notice--warning}
+    You must use a top level domain extension for this to work properly.
+    {: .notice--warning}
     
 5. The domain is now added but unverified. To verify the domain you will need to configure DNS with a TXT record, via the domain registrar, where you purchased your domain.
 
