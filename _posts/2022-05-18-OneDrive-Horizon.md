@@ -19,8 +19,8 @@ For reference, my environment uses AppVolumes for application management, as wel
 # Supported Scenarios
 
 - Virtual desktops that persist between sessions.
-- Non-persistent virtual desktops that use [Azure Virtual Desktop](https://docs.microsoft.com/en-us/azure/virtual-desktop).
-- Non-persistent virtual desktops that have [FSLogix Apps](https://docs.microsoft.com/en-us/fslogix/configure-profile-container-tutorial) or [FSLogix Office Container](https://docs.microsoft.com/en-us/fslogix/configure-office-container-tutorial).
+- Non-persistent virtual desktops that use Azure Virtual Desktop.
+- Non-persistent virtual desktops that have FSLogix Apps or FSLogix Office Container
 
 # Install OneDrive
 
