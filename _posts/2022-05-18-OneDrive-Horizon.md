@@ -73,7 +73,7 @@ Create or modify the snapvol.cfg file so that it contains:
 
 In order to provide a seamless user experience, there are a number of policies you should set that control how OneDrive behaves. 
 
-## Silently sign in users to the OneDrive sync client with their Windows credentials
+## Silently sign in users to the OneDrive
 
 Enabling this setting will cause the OneDrive sync client to automatically sign in without prompting the user to enter their account credentials. The client will use the windows login credentials to sign in.
 
