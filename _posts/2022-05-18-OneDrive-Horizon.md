@@ -3,7 +3,7 @@ layout: single
 title:  "Install and Configure OneDrive on VMware Horizon for Non-Persistent Pools"
 date:   2022-05-18 10:00:00 +0000
 categories: VMware Horizon OneDrive
-permalink: VMwareHorizonOneDrive
+permalink: VMwareHorizon-OneDrive
 tags:
   - VMware Horizon
   - OneDrive
@@ -91,7 +91,7 @@ Setting: *Enabled.*
 
 ![Untitled](/assets/images/VMwareHorizon-OneDrive/SSOPolicy.png)
 
-### **Set via registry:**
+**Set via Registry:**
 
 ```
 [HKLM\SOFTWARE\Policies\Microsoft\OneDrive]"SilentAccountConfig"="dword:00000001”
