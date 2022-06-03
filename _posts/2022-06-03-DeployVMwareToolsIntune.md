@@ -13,7 +13,7 @@ When designing and developing solutions using Microsoft Endpoint Manager i tend 
 
 My hypervisor of choice is currently VMware Workspace (or VMware Fusion if i’m on a Mac), but i also have a vSphere cluster for testing at my place of work. To take advantage of all the functionality a virtual machine offers, you need to ensure you have installed the VMware Tools Agent.
 
-This blog will explain how to automatically deploy the VMware Tools agent to all VMware based virtual machines in your environment.
+This blog will explain how to package and automatically deploy the VMware Tools agent to all VMware based virtual machines in your environment.
 
 # Create a dynamic Azure Active Directory group which targets VMware based virtual machines
 
@@ -39,7 +39,7 @@ Once you’ve filled out the fields, select *Add dynamic query*.
 
 ![GroupDetails.png](/assets/images/DeployVMwareTools/GroupDetails.png)
 
-The best way to target only VMware virtual machines is to use the *deviceManufacturer* property, with an operator of *Equals*, and a value of *`VMware, Inc.`.*
+The best way to target only VMware virtual machines is to use the *deviceManufacturer* property, with an operator of *Equals*, and a value of `VMware, Inc.`.
 
 Rule syntax:
 
@@ -57,7 +57,7 @@ Once validated, select *Save* at the top of the screen, then *Create*.
 
 ![saveGroup.gif](/assets/images/DeployVMwareTools/saveGroup.gif)
 
-# Get the installation media
+# Obtain the installation files
 
 If you know the version of the VMware Tools Agent that you require, then you can download it directly from the [VMware Customer Connect](https://customerconnect.vmware.com/en/downloads/info/slug/datacenter_cloud_infrastructure/vmware_tools/12_x) website.
 
@@ -71,7 +71,7 @@ You will only need the `setup64.exe` (as long as you're installing onto a 64bit 
 
 # Gather the required installation details
 
-In order to create an Intune application we need 3 pieces of information (at a minimum): the install command, uninstall command, and detection method.
+In order to create an Intune application we need 3 pieces of information (at a minimum); the install command, uninstall command, and detection method.
 
 ## Understand the command line switch options
 
@@ -133,13 +133,20 @@ HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall
 
 Check each GUID based key until you find one with a *DisplayName* entry of ‘VMware Tools’. In this key will be an entry with the name ‘UninstallString’. This is the vale we want.
 
+![UninstallString.gif](/assets/images/DeployVMwareTools/UninstallString.gif)
+
 In my case it was as follows:
 
 ```
 MsiExec.exe /I{1FF5D624-5515-4343-837A-E54C101573E6}
 ```
+We now need to modify the string to make it a proper uninstall msiexec command, to make it run silently, and to supress the reboot.
 
-![UninstallString.gif](/assets/images/DeployVMwareTools/UninstallString.gif)
+The final uninstall string is as follows:
+
+```
+MsiExec.exe /x {1FF5D624-5515-4343-837A-E54C101573E6} /qn REBOOT=R
+```
 
 ## Identify the detection method
 
@@ -167,13 +174,13 @@ Download the latest version of the prep tool and extract it into your directory 
 
 Copy your installation files into the *input* folder then launch the *IntuneWinAppUtil application. Enter the following information:*
 
-Please specify the source folder: *Input*
+**Please specify the source folder:** *Input*
 
-Please specify the setup file: *Setup64.exe*
+**Please specify the setup file:** *Setup64.exe*
 
-Please specify the output folder: *Output*
+**Please specify the output folder:** *Output*
 
-Do you want to specify catalog folder (Y/N): *N*
+**Do you want to specify catalog folder (Y/N):** *N*
 
 ![ContentPrepProcess.gif](/assets/images/DeployVMwareTools/ContentPrepProcess.gif)
 
@@ -191,19 +198,19 @@ Under the *App Information* page, click *select app package file*, and upload th
 
 Under the *Program* page enter the following:
 
-Install command:
+**Install command:**
 
 ```
 setup64.exe /s /v "/qn REBOOT=R ADDLOCAL=ALL REMOVE=Hgfs”*
 ```
 
-Uninstall command: 
+**Uninstall command:** 
 
 ```
 MsiExec.exe /x {1FF5D624-5515-4343-837A-E54C101573E6} /qn REBOOT=R*
 ```
 
-Install behavior: *System.*
+**Install behavior:** *System.*
 
 Select *Next.*
 
@@ -211,15 +218,15 @@ Under the *Requirements* page there are 2 mandatory fields to set, the *Operatin
 
 Under the *Detection Rule* page, for *Rule format* select *Manually configure detection rule* from the drop down. Click *+Add  button then fill out the fields on the fly out.*
 
-Rule type: File.
+**Rule type:** File.
 
-Path: %ProgramFiles%\VMWare\VMWare Tools\
+**Path:** %ProgramFiles%\VMWare\VMWare Tools\
 
-File or folder: vmtoolsd.exe
+**File or folder:** vmtoolsd.exe
 
-Detection method: Files or folder exists.
+**Detection method:** Files or folder exists.
 
-Associated with a 32-bit app on 64-bit clients: No.
+**Associated with a 32-bit app on 64-bit clients:** No.
 
 Leave the defaults on the dependencies and supersedence pages.
 
@@ -228,3 +235,9 @@ On the Assignments page, under *Required*, select *+Add group*, then search for 
 Review the Summery page and once happy select *create*.
 
 ![AppFields.gif](/assets/images/DeployVMwareTools/AppFields.gif)
+
+# Conclusion
+
+You have now successfully created and deployed the VMware Tools Agent to all VMware based virtual machines enrolled into your environment. The application will be included in any further Autopilot deployments on VMware virtual machines, so you can take advantage of all the virtual machine functionality offered as soon as your machine is provisioned.
+
+![deployed.png](/assets/images/DeployVMwareTools/deployed.png)
