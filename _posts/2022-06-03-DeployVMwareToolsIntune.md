@@ -1,9 +1,9 @@
 ---
 layout: single
-title:  "Deploy VMware Tools via Endpoint Manager/Intune"
+title:  "Deploy VMware Tools via Microsoft Endpoint Manager/Intune"
 date:   2022-06-02 10:00:00 +0000
 categories: Intune
-permalink: deployvmwaretools
+permalink: memdeployvmwaretools
 tags:
   - Application Deployment
   - MEM
@@ -230,7 +230,7 @@ Under the *Detection Rule* page, for *Rule format* select *Manually configure de
 
 Leave the defaults on the dependencies and supersedence pages.
 
-On the Assignments page, under *Required*, select *+Add group*, then search for and select the ‘*All VMware Virtual Machines*’ group we created earlier, press *select* then *Next.*
+On the Assignments page, under *Required*, select *+Add group*, then search for and select the ‘*All VMware Virtual Machines*’ group we created earlier, press *Select* then *Next.*
 
 Review the Summery page and once happy select *create*.
 
@@ -238,6 +238,6 @@ Review the Summery page and once happy select *create*.
 
 # Conclusion
 
-You have now successfully created and deployed the VMware Tools Agent to all VMware based virtual machines enrolled into your environment. The application will be included in any further Autopilot deployments on VMware virtual machines, so you can take advantage of all the virtual machine functionality offered as soon as your machine is provisioned.
+You have now successfully created and deployed the VMware Tools Agent to all VMware based virtual machines enrolled into your environment. The application will be included in any further Autopilot deployments on VMware hypervisors, so you can take advantage of all the virtual machines functionality as soon as it is provisioned.
 
 ![deployed.png](/assets/images/DeployVMwareTools/deployed.png)
