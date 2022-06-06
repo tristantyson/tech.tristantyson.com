@@ -173,7 +173,7 @@ Before you can add a Win32 app to Intune, you must prepare the app using the [Mi
 
 Download the latest version of the prep tool and extract it into your directory of choice. I like to create two additional folders in file structure called *Input* and *Output*.
 
-![PrepToolFolders.PNG](/assets/images/DeployVMwareTools/PrepToolFolders.png)
+![PrepToolFolders.PNG](/assets/images/DeployVMwareTools/PrepToolFolders.PNG)
 
 Copy your installation files into the *input* folder then launch the *IntuneWinAppUtil application. Enter the following information:*
 
