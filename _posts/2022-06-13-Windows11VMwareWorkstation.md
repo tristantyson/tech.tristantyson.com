@@ -1,7 +1,7 @@
 ---
 layout: single
 title:  "How to create a Windows 11 virtual machine using VMware Workstation 16"
-date:   2022-06-02 10:00:00 +0000
+date:   2022-06-13 10:00:00 +0000
 categories: VMware Workstation 16 Windows 11
 permalink: win11workstation
 tags:
