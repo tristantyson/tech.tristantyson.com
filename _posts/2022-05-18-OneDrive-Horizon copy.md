@@ -65,7 +65,9 @@ On your master image navigate to (and create if necessary) `%SVAgent%\Config\Cus
 
 Create or modify the snapvol.cfg file so that it contains:
 
-`exclude_registry=\REGISTRY\MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\SyncRootManager`
+```
+exclude_registry=\REGISTRY\MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\SyncRootManager
+```
 
 ![Untitled](/assets/images/VMwareHorizon-OneDrive/snapvolcfg.png)
 
@@ -155,4 +157,4 @@ Note: 1111-2222-3333-4444 represents your tenant ID.
 
 Installing and configuring OneDrive in this way allows for a seamless user experience. A user can logon to a virtual machine and OneDrive will automatically sign-in, synchronise, and redirect folders, all without any user interaction or prompts.
 
-![fulllogonprocess.gif](/assets/images/VMwareHorizon-OneDrive/fulllogonprocess.gif)
+![fulllogonprocess.gif](/assets/images/VMwareHorizon-OneDrive/fulllogonprocess.gif) 

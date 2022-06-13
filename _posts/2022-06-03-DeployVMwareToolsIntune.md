@@ -1,23 +1,24 @@
 ---
 layout: single
-title:  "Deploy VMware Tools via Endpoint Manager/Intune"
+title:  "Deploy VMware Tools via Microsoft Endpoint Manager/Intune"
 date:   2022-06-02 10:00:00 +0000
 categories: Intune
-permalink: deployvmwaretools
+permalink: memdeployvmwaretools
 tags:
   - Application Deployment
   - MEM
+  - VMware
 toc: true
 ---
-When designing and developing solutions using Microsoft Endpoint Manager i tend to provision a lot of virtual machines. This gives me a quick and disposable way to test my solutions before moving on to physical devices. It also helps me to not ruin my own device by testing on myself!
+When designing and developing solutions using Microsoft Endpoint Manager, I tend to provision a lot of virtual machines. This gives me a quick and disposable way to test my solutions before moving on to physical devices. It also helps me to not ruin my own device by testing on myself!
 
-My hypervisor of choice is currently VMware Workspace (or VMware Fusion if i’m on a Mac), but i also have a vSphere cluster for testing at my place of work. To take advantage of all the functionality a virtual machine offers, you need to ensure you have installed the VMware Tools Agent.
+My hypervisor of choice is currently VMware Workspace (or VMware Fusion if I’m on a Mac), but I also have a vSphere cluster for testing at my place of work. To take advantage of all the functionality a virtual machine offers, you need to ensure you have installed the VMware Tools Agent.
 
-This blog will explain how to automatically deploy the VMware Tools agent to all VMware based virtual machines in your environment.
+This blog will explain how to package and automatically deploy the VMware Tools agent to all VMware based virtual machines in your environment.
 
 # Create a dynamic Azure Active Directory group which targets VMware based virtual machines
 
-As the agent will only ever need to be installed onto VMware based virtual machines, we can create an Azure AD security group with a dynamic rule to only target VMware based machines. That way we can use this group to deploy the agent only where it is required.
+As the agent will only ever need to be installed onto VMware based virtual machines, we can create an Azure AD security group with a dynamic rule to only target VMware based machines. That way we can use this group to deploy the agent, only where it is required.
 
 To create a new Azure Active Directory group, log into the [Azure Portal](https://portal.azure.com), search for *Azure Active Directory*, select *Groups*, then choose *New group*.
 
@@ -39,7 +40,7 @@ Once you’ve filled out the fields, select *Add dynamic query*.
 
 ![GroupDetails.png](/assets/images/DeployVMwareTools/GroupDetails.png)
 
-The best way to target only VMware virtual machines is to use the *deviceManufacturer* property, with an operator of *Equals*, and a value of *`VMware, Inc.`.*
+The best way to target only VMware virtual machines, is to use the *deviceManufacturer* property, with an operator of *Equals*, and a value of `VMware, Inc.`.
 
 Rule syntax:
 
@@ -57,7 +58,7 @@ Once validated, select *Save* at the top of the screen, then *Create*.
 
 ![saveGroup.gif](/assets/images/DeployVMwareTools/saveGroup.gif)
 
-# Get the installation media
+# Obtain the installation files
 
 If you know the version of the VMware Tools Agent that you require, then you can download it directly from the [VMware Customer Connect](https://customerconnect.vmware.com/en/downloads/info/slug/datacenter_cloud_infrastructure/vmware_tools/12_x) website.
 
@@ -71,7 +72,7 @@ You will only need the `setup64.exe` (as long as you're installing onto a 64bit 
 
 # Gather the required installation details
 
-In order to create an Intune application we need 3 pieces of information (at a minimum): the install command, uninstall command, and detection method.
+In order to create an Intune application, we need 3 pieces of information (minimum): install command, uninstall command, and detection method.
 
 ## Understand the command line switch options
 
@@ -83,11 +84,13 @@ To perform a complete, silent installation, with no component configuration, and
 setup64.exe /S /v "/qn REBOOT=R"
 ```
 
-If you want to remove certain components from the installation, you can pass through the `ADDLOCAL=ALL` and `REMOVE=component` MSI properties. Replace `component` with the feature name listed below. To remove multiple components, comma separate each feature name.
-
+If you want to remove certain components from the installation, you can pass through the `ADDLOCAL=ALL` and `REMOVE=component` MSI properties.
 ```
 setup64.exe /S /v "/qn REBOOT=R ADDLOCAL=ALL REMOVE=component"
 ```
+ Replace `component` with the feature name listed below. To remove multiple components, comma separate each feature name.
+
+
 
 | Feature Name | Description |
 | --- | --- |
@@ -112,7 +115,7 @@ setup64.exe /S /v "/qn REBOOT=R ADDLOCAL=ALL REMOVE=component"
 | VSS | The VSS driver is used for creating automatic backups. This driver is used, if the guest operating system is Windows Vista, Windows Server 2003, or other newer operating systems. Linux and older Windows operating systems use the Filesystem Sync driver. |
 | BootCamp | The BootCamp driver provides Mac BootCamp support. |
 
-Using the above table we can create a install command which installs all components, apart from the ‘shared folders’ component:
+Using the above table, we can create an install command which installs all components, apart from the ‘shared folders’ component:
 
 ```
 setup.exe /S /v "/qn REBOOT=R ADDLOCAL=ALL REMOVE=Hgfs"
@@ -125,21 +128,28 @@ Always test your commands are working by running them manually, before moving on
 
 The best way of identifying the uninstall string is to install the agent manually, then check the registry for the uninstall string.
 
-Once installed navigate to:
+Once installed, navigate to:
 
 ```
 HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall
 ```
 
-Check each GUID based key until you find one with a *DisplayName* entry of ‘VMware Tools’. In this key will be an entry with the name ‘UninstallString’. This is the vale we want.
+Check each GUID based key until you find one with a *DisplayName* entry of ‘VMware Tools’. In this key, there will be an entry with the name ‘UninstallString’. This is the value we want.
+
+![UninstallString.gif](/assets/images/DeployVMwareTools/UninstallString.gif)
 
 In my case it was as follows:
 
 ```
 MsiExec.exe /I{1FF5D624-5515-4343-837A-E54C101573E6}
 ```
+We now need to modify the string to make it a proper uninstall msiexec command, to make it run silently, and to supress the reboot.
 
-![UninstallString.gif](/assets/images/DeployVMwareTools/UninstallString.gif)
+The final uninstall string is as follows:
+
+```
+MsiExec.exe /x {1FF5D624-5515-4343-837A-E54C101573E6} /qn REBOOT=R
+```
 
 ## Identify the detection method
 
@@ -161,23 +171,23 @@ The only thing left to do is put everything together in Intune and deploy it to 
 
 Before you can add a Win32 app to Intune, you must prepare the app using the [Microsoft Win32 Content Prep Tool.](https://github.com/Microsoft/Microsoft-Win32-Content-Prep-Tool)
 
-Download the latest version of the prep tool and extract it into your directory of choice. I like to create 2 additional folders in file structure called *Input* and *Output*.
+Download the latest version of the prep tool and extract it into your directory of choice. I like to create two additional folders in file structure called *Input* and *Output*.
 
-![PrepToolFolders.PNG](/assets/images/DeployVMwareTools/PrepToolFolders.png)
+![PrepToolFolders.PNG](/assets/images/DeployVMwareTools/PrepToolFolders.PNG)
 
 Copy your installation files into the *input* folder then launch the *IntuneWinAppUtil application. Enter the following information:*
 
-Please specify the source folder: *Input*
+**Please specify the source folder:** *Input*
 
-Please specify the setup file: *Setup64.exe*
+**Please specify the setup file:** *Setup64.exe*
 
-Please specify the output folder: *Output*
+**Please specify the output folder:** *Output*
 
-Do you want to specify catalog folder (Y/N): *N*
+**Do you want to specify catalog folder (Y/N):** *N*
 
 ![ContentPrepProcess.gif](/assets/images/DeployVMwareTools/ContentPrepProcess.gif)
 
-The prep tool will output a .intunewin file in the *output folder.*
+The prep tool will output an .intunewin file in the *output folder.*
 
 ![intunewin.png](/assets/images/DeployVMwareTools/intunewin.png)
 
@@ -187,44 +197,50 @@ Log into the Endpoint Manager Portal and navigate to *Apps,* then *All Apps*, se
 
 ![NewApp.gif](/assets/images/DeployVMwareTools/NewApp.gif)
 
-Under the *App Information* page, click *select app package file*, and upload the .intunewin file we crated in the last stage. This will pre-populate the application information. Edit each field with the relevant information to your app and select *next.*
+Under the *App Information* page, click *select app package file*, and upload the .intunewin file we created in the last stage. This will pre-populate the application information. Edit each field with the relevant information to your app and select *next.*
 
-Under the *Program* page enter the following:
+Under the *Program* page, enter the following:
 
-Install command:
+**Install command:**
 
 ```
 setup64.exe /s /v "/qn REBOOT=R ADDLOCAL=ALL REMOVE=Hgfs”*
 ```
 
-Uninstall command: 
+**Uninstall command:** 
 
 ```
 MsiExec.exe /x {1FF5D624-5515-4343-837A-E54C101573E6} /qn REBOOT=R*
 ```
 
-Install behavior: *System.*
+**Install behavior:** *System.*
 
 Select *Next.*
 
-Under the *Requirements* page there are 2 mandatory fields to set, the *Operating system architecture*. Configure these and any others to the relevant settings for your application and environment.
+Under the *Requirements* page, there are two mandatory fields to set, the *Operating system architecture*, and the *Minimum operating system version*. Configure these and any others to the relevant settings for your application and environment.
 
 Under the *Detection Rule* page, for *Rule format* select *Manually configure detection rule* from the drop down. Click *+Add  button then fill out the fields on the fly out.*
 
-Rule type: File.
+**Rule type:** File.
 
-Path: %ProgramFiles%\VMWare\VMWare Tools\
+**Path:** %ProgramFiles%\VMWare\VMWare Tools\
 
-File or folder: vmtoolsd.exe
+**File or folder:** vmtoolsd.exe
 
-Detection method: Files or folder exists.
+**Detection method:** Files or folder exists.
 
-Associated with a 32-bit app on 64-bit clients: No.
+**Associated with a 32-bit app on 64-bit clients:** No.
 
 Leave the defaults on the dependencies and supersedence pages.
 
-On the Assignments page, under *Required*, select *+Add group*, then search for and select the ‘*All VMware Virtual Machines*’ group we created earlier, press *select* then *Next.*
+On the Assignments page, under *Required*, select *+Add group*, then search for and select the ‘*All VMware Virtual Machines*’ group we created earlier, press *Select* then *Next.*
 
 Review the Summery page and once happy select *create*.
 
 ![AppFields.gif](/assets/images/DeployVMwareTools/AppFields.gif)
+
+# Conclusion
+
+You have now successfully created and deployed the VMware Tools Agent to all VMware based virtual machines enrolled into your environment. The application will be included in any further Autopilot deployments on VMware hypervisors, so you can take advantage of all the virtual machine's functionality as soon as it is provisioned.
+
+![deployed.png](/assets/images/DeployVMwareTools/deployed.png)
