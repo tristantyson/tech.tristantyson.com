@@ -12,7 +12,7 @@ toc: true
 ---
 A quick blog on the syntax required to deploy a PowerShell script as a Win32 Windows application via Microsoft Endpoint Manager/Intune.
 
-There are a number of ways to deploy a PowerShell script with MEM. You can deploy a script on its own, [the “traditional” way](https://docs.microsoft.com/en-us/mem/intune/apps/intune-management-extension), or you could look at [proactive remediation](https://docs.microsoft.com/en-us/mem/analytics/proactive-remediations), for a more reactive approach. The method detailed here is more suited to deploying a PSAppDeploy package or a custom script installer you’ve written yourself.
+There are a number of ways to deploy a PowerShell script with MEM. You can deploy a script on its own, [the “traditional” way](https://docs.microsoft.com/en-us/mem/intune/apps/intune-management-extension), or you could look at [Proactive Remediation](https://docs.microsoft.com/en-us/mem/analytics/proactive-remediations), for a more reactive approach. The method detailed here is more suited to deploying a PSAppDeploy package or a custom script installer you’ve written yourself.
 
 # Syntax
 
@@ -79,4 +79,5 @@ Next through the remaining pages and assign the app to a group. Select *Create* 
 ## Confirm deployment
 
 The app will now deploy and once executed, the script will create the file  `Output.txt` in `C:\ProgramData\Example Script\`. Navigate to this folder to confirm the script has executed and the app has installed successfully.
+
 ![deployed.gif](assets/images/DeployPowerShellApp/deployed.gif)

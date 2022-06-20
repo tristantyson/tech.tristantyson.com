@@ -5,7 +5,7 @@ date:   2022-04-05 10:20:31 +0000
 categories: MEM M365 DEV
 permalink: learnmem-m365dev
 tags:
-  - Microsoft Endpoint Manager
+  - MEM
   - M365 Developer Program
 toc: true
 gallery:
