@@ -28,7 +28,7 @@ Powershell.exe -NoProfile -ExecutionPolicy ByPass -File .\ScriptName.ps1
 
 ## Script to deploy
 
-In this example we will deploy the below script via MEM/Intune. The script creates the folder `C:\ProgramData\Example Script`, then creates a new text file called `Output.txt` with the content “Script executed” within.
+In this example, we will deploy the below script via MEM/Intune. The script creates the folder `C:\ProgramData\Example Script`, then creates a new text file called `Output.txt` with the content “Script executed” within.
 
 ```powershell
 if (-not (Test-Path "$($env:ProgramData)\Example Script"))
@@ -40,13 +40,13 @@ Set-Content -Path "$($env:ProgramData)\Example Script\Output.txt" -Value "Script
 
 ## Prepare for upload
 
-Save the script and package it into a .intunewin file using the [Microsoft Win32 Content Prep Tool](https://go.microsoft.com/fwlink/?linkid=2065730).
+Save the script and package it into an .intunewin file using the [Microsoft Win32 Content Prep Tool](https://go.microsoft.com/fwlink/?linkid=2065730).
 
 ![createIntunewin.gif](assets/images/DeployPowerShellApp/createIntunewin.gif)
 
 ## Create and deploy the application
 
-To create the application in MEM go to *Apps*, *All Apps*, then select *Add*. Select *Windows (Win32)* from the App type drop down, then press *Select*.
+To create the application in MEM, go to *Apps*, *All Apps*, then select *Add*. Select *Windows (Win32)* from the App type drop down, then press *Select*.
 
 ![selectIntunewinFile.gif](assets/images/DeployPowerShellApp/selectIntunewinFile.gif)
 
@@ -54,7 +54,7 @@ Enter the relevant information on the *App Information* page, then select *Next*
 
 ![appInfo.png](assets/images/DeployPowerShellApp/appInfo.png)
 
-On the Program page enter the install command `Powershell.exe -NoProfile -ExecutionPolicy ByPass -File .\script.ps1`. For the sake of this example enter the same for the uninstall command. If you really wanted an uninstall script you could use `Remove-Item 'C:\ProgramData\Example Script' -force`
+On the Program page, enter the install command `Powershell.exe -NoProfile -ExecutionPolicy ByPass -File .\script.ps1`. For the sake of this example, enter the same for the uninstall command. If you really wanted an uninstall script, you could use `Remove-Item 'C:\ProgramData\Example Script' -force`
 
 ![program.png](assets/images/DeployPowerShellApp/program.png)
 
