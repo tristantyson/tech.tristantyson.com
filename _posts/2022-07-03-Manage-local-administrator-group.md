@@ -23,11 +23,9 @@ These are:
 - Global Administrator
 - Azure AD joined device local administrator
 
-We can prove this. 
+We can prove this. If you look at the local administrator group on a newly Azure AD joined device, you will see there are 2 SIDs listed.
 
-If you look at the local administrator group on a newly Azure AD joined device, you will see there are 2 SIDs listed.
-
-![Untitled](assets/images/ManageLocalAdmin/admingroup.png)
+![Untitled](assets/images/ManageLocalAdmin/AdminGroup.png)
 
 To confirm what these SIDs are in Azure, first we need to convert the SID to an Object ID, then we can use the GraphAPI to query the ObjectID, which will give us the name of the role it's associated with.
 
